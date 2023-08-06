@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{Note}}</title>
+
+    <style>
+        html { 
+            background:url('{% static 'images/home.jpg' %}') no-repeat center center fixed; 
+            background-size: cover;
+          }
+          .title{
+            font-family:'Times New Roman', Times, serif ;
+            font-size: 40px;
+            margin : 10px 10px 10px 30px;
+            float: left;
+          }
+          header{
+            top: 0;
+            background-color: Black;
+            color : white;
+            height: 70px;
+          }
+          .logout{
+            text-decoration: none;
+    
+          }
+          button.logout{
+            height: 30px;
+            width: 80px;
+            border-radius:5px;
+            margin: 20px 30px 10px 10px;
+            float: right;
+            background: Lavender;
+            color: Black;
+            font-size: 20px;
+          }
+          .user{
+            margin: 0px 30px 10px 10px;
+            padding: 20px;
+            float: right;
+            display: inline ;
+            font-size: 30px;
+          }
+          a{
+            text-decoration:none;
+          }
+          .add{
+            margin: 30px 50px 40px 375px;
+            padding: 10px 60px;
+            height: 520px;
+            width: 600px;
+            background-color: White;
+            color: Black;
+            border-radius: 15px;
+          }
+        
+          .form-control{
+            display:block;
+            width:100%;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding:.375rem .75rem;
+            font-size:1rem;
+            border-radius: 5px;
+            width: 100%;
+            border-color: Black;
+          }
+          .label{
+            font-size: 20px;
+            font-weigth: 2px;
+          }
+          .button{
+            height: 40px;
+            width: 105%;
+            background-color: #734F96;
+            color: white;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+        button{
+            margin-top: 40px;
+            height: 35px;
+            width: 70px;
+            background-color: Yellow;
+            color: Black;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+         
+    </style>
+</head>
+<body>
+    <header class: "navbar">
+        <nav>
+            <label class="title">Notes - Update</label>
+            <button class="logout"><a href="{% url 'logout' %}" class="logout">Logout</a></button>
+            <span class="user">Hello, {{user.username}} !</span>
+        </nav>
+    </header>
+    <div class="add">
+        <Center><h1>Update your Note</h1></Center>
+        <form action="" method ="POST">
+            {% csrf_token %}
+            <div class="userinput">
+                <label for="">Title</label><br><br>
+                <span class="span">{{form.title}}</span> <br><br>
+                <label for="">Content</label><br><br>
+                <span class="span">{{form.content}}</span><br><br>
+            </div>
+            <input type="submit" value="Update" class="button"><br><br>
+        </form>
+        <button class="back"><a href="{% url 'home' %}" class="back">Back</a></button>
+    </div>
+</body>
+</html>

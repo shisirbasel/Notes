@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    html { 
+        background:url('{% static 'images/home.jpg' %}') no-repeat center center fixed; 
+        background-size: cover;
+      }
+      .title{
+        font-family:'Times New Roman', Times, serif ;
+        font-size: 40px;
+        margin : 10px 10px 10px 30px;
+        float: left;
+      }
+      header{
+        top: 0;
+        background-color: Black;
+        color : white;
+        height: 70px;
+      }
+      .logout{
+        text-decoration: none;
+
+      }
+      button.logout{
+        height: 30px;
+        width: 80px;
+        border-radius:5px;
+        margin: 20px 30px 10px 10px;
+        float: right;
+        background: Lavender;
+        color: Black;
+        font-size: 20px;
+      }
+      .user{
+        margin: 0px 30px 10px 10px;
+        padding: 20px;
+        float: right;
+        display: inline ;
+        font-size: 30px;
+      }
+      a{
+        text-decoration:none;
+      }
+
+      .notes{
+        height: auto;
+        width: 50%;
+        margin-left: 365px;
+        background-color: white;
+        border-radius: 20px;
+      }
+      .heading{
+        background-color: black;
+        color: White;
+        height: 70px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border-radius: 20px 20px 0px 0px;
+      }
+      th{
+        height: 30px;
+        width: 400px;
+        font-size: 25px;
+      }
+      .content{
+        margin-top: -20px;
+      }
+      .yournotes{
+        padding: 0px;
+      }
+      td{
+        margin: 10px 40px;
+        font-size: 20px;
+      }
+      tr{
+        margin: 20px;
+        text-align: center;
+      }
+      .delete{
+        height: 30px;
+        width: 60px;
+        border-radius:5px;
+        margin: 10px;
+        background: Red;
+        color: White;
+        font-size: 15px;
+      }
+      .svg{
+        height: 50px;
+        float: right;
+        margin: 10px 40px;
+        border-radius: 40px;
+      }
+      .yournotes{
+        display: inline-block;
+        padding:8px ;
+        font-size: 40px;
+        margin-left: 250px;
+      }
+      td, th {
+        text-align: center;
+        padding: 5px;
+      }
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+</style>
+<body>
+    <header class: "navbar">
+        <nav>
+            <label class="title">Notes - Home</label>
+            <button class="logout"><a href="{% url 'logout' %}" class="logout">Logout</a></button>
+            <span class="user">Hello, {{user.username}} !</span>
+        </nav>
+    </header>
+
+    <div class="notes">
+        <div class="heading">
+            <!--<h1 style='text-align: center;' class="yournotes">Your Notes:</h1>-->
+            <span class="yournotes"><label for="">Your Notes</label></span>
+            <a href="{% url 'addnote' %}"><img src="{% static 'images/add.png' %}" alt="" class="svg"></a>
+        </div>
+        <div class="content">
+          {% if notes %}
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Created On</th>
+                    <th>Action</th>
+                </tr>
+                {% for note in notes %}
+                    <tr>
+                        <td><b><a href=" {% url 'update' note.id%}" style="color: black;">{{note.title}}</a></b></td>
+                        <td>{{note.createdate}}</td>
+                        <td>
+                          <form action="{% url 'delete' note.id%}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete" class="delete">
+                          </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <tr>
+              <th><h2><center>No Notes found</center></h2></th>
+            </tr>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer></footer>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        .title{
+            margin-left: 245px;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: -20px;
+            color: #734F96;
+        }
+        img{
+            border-radius: 15px 0px 0px 15px;
+            margin-left: 175px;
+            width: 600px;
+            height: 550px;
+            box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+            0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+            0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+        }
+        .show{
+            display: flex;
+            margin-top: 70px;
+        }
+        .card{
+            background-color: white;
+            border-radius: 0px 15px 15px 0px;
+            padding: 20px 50px 60px 50px;
+            width: 400px;
+            height: 470px;
+            box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+            0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+            0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+        }
+        input{
+            height: 25px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            outline: 0;
+            width: 97%;
+            background-color: transparent;
+            float: left;
+        }
+        .button{
+            height: 40px;
+            width: 100%;
+            background-color: #734F96;
+            color: white;
+        }
+        div.title, div.show{
+            margin-top: 50px;
+        }
+        .message{
+            margin: 30px,15px;
+            width: 100%;
+            background-color: lavender;
+            text-align: center;
+            font-size: 18px;
+            color: Red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <h1>Welcome to Notes</h1>
+    </div>
+    <div class="show">
+        <div class="image">
+            <img src="{% static 'images/login.jpg' %}" alt="">
+        </div>
+
+        <div class="card">
+            <div class="heading">
+                <center><h1> Register </h1></center>
+            </div>
+
+            <div class="form">
+
+                <div class="input">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <label for="username">Username: </label> {{form.username}} <br><br>
+                        <label for="password1">Password: </label>  {{form.password1}} <br><br>
+                        <label for="password2">Re-Type Password: </label> {{form.password2}} <br><br>
+                        <input type="submit" value="Register" class="button">
+                        <br>
+                        <a href="{% url 'login' %}">Login?</a>
+                    </form>
+                </div>  
+                
+                <div class="message">
+                    {{form.errors}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

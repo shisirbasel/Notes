@@ -1,7 +1,8 @@
-"""Notes URL Configuration
+"""
+URL configuration for notes project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.home, name ='home'),
+    path('register',views.RegisterUser, name ='register'),
+    path('login',views.loginUser, name='login'),
+    path('addnote',views.addNote, name='addnote'),
+    path('delete/<int:id>/',views.deleteNote,name='delete'),
+    path('logout',views.logoutUser,name='logout'),
+    path('<int:id>/',views.updateNote,name='update')
 ]
