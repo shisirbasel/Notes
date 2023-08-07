@@ -56,6 +56,7 @@ def addNote(request):
         if form.is_valid():
             form.instance.user = user
             form.save()
+            return redirect('home')
     else: 
         form =AddNote()
     
@@ -77,6 +78,7 @@ def updateNote(request,id):
         form = AddNote(request.POST,instance = note)
         if form.is_valid():
             form.save()
+            return redirect('home')
     else:
         note = Note.objects.get(pk=id)
         form = AddNote(instance = note)
